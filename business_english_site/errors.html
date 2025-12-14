@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>錯題複習本 - 學習工具區</title>
+    <link rel="stylesheet" href="assets.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    
+    <header class="navbar">
+        <div class="logo">Business English Hub</div>
+        
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="business.html">Videos</a>
+            
+            <div class="dropdown">
+                <a href="#" class="dropbtn active">Tools <i class="fas fa-caret-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="vocabulary.html"><i class="fas fa-book-open"></i> Word Bank</a>
+                    <a href="errors.html" class="sub-active"><i class="fas fa-times-circle"></i> Error Review</a>
+                    <a href="strategy.html"><i class="fas fa-graduation-cap"></i> Reading Skills</a>
+                </div>
+            </div>
+            
+            <a href="about.html">About Us</a>
+        </nav>
+    </header>
+
+    <main class="tool-page-container">
+        
+        <section class="page-header tool-header">
+            <h2 class="tool-title"><i class="fas fa-times-circle"></i> 錯題複習本</h2>
+            <p class="subtitle">您在課程理解測驗中答錯的題目會自動記錄於此。</p>
+        </section>
+
+        <div id="error-review-list" class="error-list">
+            <p id="loading-message-error">目前您還沒有錯誤記錄。</p>
+        </div>
+
+        <button class="btn-primary btn-clear-errors" onclick="clearErrorReview()">清空所有錯題紀錄</button>
+    </main>
+    
+    <footer>
+        </footer>
+
+    <script src="storage.js"></script>
+
+</body>
+</html>
