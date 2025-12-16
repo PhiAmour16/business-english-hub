@@ -2,20 +2,16 @@
 /* 0. 顏色與字型變數定義 (淺紫色, 文學感) */
 /* ==================================== */
 :root {
-    /* 主色系：柔和的淺紫色調 */
-    --primary-color: #8A2BE2; /* Blue Violet (核心操作與重點標題) */
-    --accent-color: #DA70D6;  /* Orchid (強調或 Hover 效果) */
-    --light-purple: #E6E6FA;  /* Lavender (柔和背景/卡片邊框) */
-    --background-color: #F8F8FF; /* Ghost White (輕盈頁面背景) */
-    
-    /* 文字與輔助色 */
+    --primary-color: #8A2BE2; 
+    --accent-color: #DA70D6;  
+    --light-purple: #E6E6FA;  
+    --main-content-bg: var(--light-purple); 
+    --background-color: #F8F8FF; 
     --text-color: #333333;
     --light-text-color: #6a6a6a;
     --white-color: #ffffff;
-    
-    /* 字型：文學感襯線體 + 易讀無襯線體 */
-    --font-heading: 'Merriweather', serif; /* 標題採用襯線體增加文學感 */
-    --font-body: 'Poppins', 'Helvetica Neue', sans-serif; /* 內文採用易讀的無襯線體 */
+    --font-heading: 'Merriweather', serif; 
+    --font-body: 'Poppins', 'Helvetica Neue', sans-serif; 
 }
 
 /* ==================================== */
@@ -27,32 +23,38 @@
     box-sizing: border-box;
 }
 
-/* 🌟 修正 1A: 確保 HTML 和 Body 可以滾動 🌟 */
 html {
-    overflow-y: scroll; /* 允許全局滾動條 */
+    overflow-y: scroll;
 }
 
 body {
     font-family: var(--font-body);
     color: var(--text-color);
-    background-color: var(--background-color);
+    background-color: var(--main-content-bg); /* 🌟 修正 1：將紫色背景設給 body 🌟 */
     line-height: 1.6;
-    min-height: 100vh; /* 確保內容能撐滿至少一個視窗 */
-    overflow-x: hidden; /* 防止水平滾動條 */
+    min-height: 100vh;
+    overflow-x: hidden;
+    
+    /* 🌟 修正 2：推開固定導航列 (Navbar) 🌟 */
+    /* 假設 Navbar 高度約 60px，給它 70px 空間 */
+    padding-top: 70px; 
 }
 
-/* 主要內容容器 */
 main {
-    padding: 20px 5%;
-    max-width: 1200px;
+    /* 🌟 修正 3：移除所有複雜的定位和邊距 🌟 */
+    background-color: transparent; /* main 背景透明，繼承 body 的顏色 */
+    padding-top: 0; /* 移除 100vh 的 padding */
+    position: static; /* 確保沒有 z-index 衝突 */
+    z-index: auto; /* 確保沒有 z-index 衝突 */
     
-    /* 確保 main 從頂部推開固定導航列，且只需要一次性的外邊距設置 */
-    margin: 0 auto 40px auto; 
-    
-    /* 🌟 修正 1：加大頂部間距 (padding-top) 🌟 */
-    /* 預估 Navbar 高度約 60px。我們使用 90px 或 100px 確保安全推開空間。 */
-    padding-top: 100px; 
+    /* 讓內容區塊可以有左右邊距 */
+    padding-left: 0; 
+    padding-right: 0; 
+    max-width: none; 
+    width: 100%;
+    margin: 0; 
 }
+
 
 a {
     color: var(--primary-color);
@@ -79,6 +81,7 @@ h3 { font-size: 1.5em; color: var(--text-color); }
     margin-bottom: 30px;
     font-size: 1.1em;
 }
+
 
 /* ==================================== */
 /* 2. 導航列與頁腳 (Header & Footer) */
@@ -110,7 +113,7 @@ h3 { font-size: 1.5em; color: var(--text-color); }
     padding: 5px 10px;
     font-weight: 500;
     color: var(--text-color);
-    border-bottom: 2px solid transparent; /* 預留底部空間給 active 狀態 */
+    border-bottom: 2px solid transparent;
 }
 
 .navbar nav a:hover,
@@ -142,7 +145,7 @@ footer {
     transition: background-color 0.3s, transform 0.1s;
     text-transform: uppercase;
     display: inline-block;
-    box-shadow: 0 4px 6px rgba(138, 43, 226, 0.3); /* 輕微陰影 */
+    box-shadow: 0 4px 6px rgba(138, 43, 226, 0.3);
 }
 
 .btn-primary:hover {
@@ -180,23 +183,82 @@ footer {
 /* 4. 首頁特定區塊樣式 (index.html) */
 /* ==================================== */
 .hero-banner {
+    /* 🌟 修正 4：移除 fixed 定位和 z-index 🌟 */
+    height: calc(100vh - 70px); /* 100vh 減去 body 的 padding-top (Navbar 高度) */
+    background-image: url('assets/index_background.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    
+    position: static; /* 恢復正常流 */
+    z-index: auto; /* 移除 z-index 衝突 */
+    
+    /* 🌟 Flexbox 佈局，實現垂直居中 🌟 */
+    display: flex; 
+    flex-direction: column;
+    justify-content: center; /* 垂直居中 */
+    align-items: center; /* 內容左對齊 */
+    
+    padding: 0; 
+    color: var(--white-color);  
+    background-color: transparent !important; 
     text-align: center;
-    padding: 60px 20px;
-    background: linear-gradient(135deg, var(--light-purple) 0%, var(--background-color) 100%);
-    border-radius: 15px;
-    margin-bottom: 40px;
+}
+
+
+/* Hero Banner 頂部佔位符 (已從 HTML 移除，CSS 保持乾淨) */
+/* .hero-spacer { display: none; } */
+
+
+/* 添加半透明遮罩層 (75% 圖片亮度) */
+.hero-banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.25);  
+    z-index: -1;
+}
+
+/* Hero Banner 內部內容容器 */
+.content-container-hero {
+    /* 內容居中和左對齊 */
+    max-width: 1200px;
+    margin-left: auto; /* 居中 */
+    margin-right: auto; /* 居中 */
+    width: 100%;
+    padding: 0 5%;
+    
+    /* 讓 Hero 內容在 Hero Banner 區塊內居中 */
+    align-self: center; 
+}
+
+
+/* 調整 Hero Banner 內部標題樣式 */
+.hero-banner h1, .hero-banner p {
+    position: relative;
+    z-index: 2; /* 確保文字在遮罩上 */
+    
+    color: var(--white-color);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); 
+    background-color: transparent !important;
+    text-align: center;
 }
 
 .hero-banner h1 {
-    font-size: 3em;
+    font-size: 3.5em;
     margin-bottom: 10px;
+    max-width: 100%; 
 }
 
 .hero-banner p {
-    font-size: 1.3em;
-    color: var(--light-text-color);
-    margin-bottom: 30px;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    max-width: 100%; 
 }
+
 
 .featured-videos {
     margin-bottom: 40px;
@@ -241,6 +303,15 @@ footer {
     padding: 20px;
     border-left: 3px solid var(--accent-color);
     text-align: left;
+}
+
+/* 內容居中容器 */
+.content-container {
+    max-width: 1200px; /* 限制內容的最大寬度 */
+    margin: 0 auto; /* 內容居中 */
+    padding: 0 5%; /* 內容左右內邊距 */
+
+    text-align: center;
 }
 
 
@@ -375,24 +446,22 @@ footer {
 /* ==================================== */
 .team-members {
     display: flex;
-    justify-content: space-between; /* 讓卡片左右對齊，中間分配空間 */
-    flex-wrap: wrap; /* 🌟 關鍵：允許項目換行 🌟 */
-    gap: 20px; /* 項目之間的間距 */
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
     margin-top: 20px;
-    max-width: 1000px; /* 限制團隊卡片區域的最大寬度，更美觀 */
+    max-width: 1000px;
     margin-left: auto;
     margin-right: auto;
 }
 
 .member-card {
-    /* 🌟 關鍵：設定卡片寬度略小於 1/3 (33.33%)，以容納 gap 🌟 */
-    width: calc(33.33% - 15px); 
+    width: calc(33.33% - 15px);
     padding: 20px;
     background-color: var(--white-color);
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
     text-align: center;
-    /* 確保在小於 max-width 時不會因為 min-width 崩潰 */
     min-width: 200px;
 }
 
@@ -406,7 +475,7 @@ footer {
 }
 
 .mission-section ul {
-    list-style-type: '🧠 '; /* 簡單的列表標記 */
+    list-style-type: '🧠 ';
     padding-left: 20px;
     margin-top: 15px;
 }
@@ -423,7 +492,7 @@ footer {
 }
 
 .syntax-box {
-    flex: 1 1 45%; /* 確保每行有兩個 */
+    flex: 1 1 45%;
     background-color: var(--light-purple);
     padding: 15px;
     border-radius: 8px;
@@ -457,14 +526,14 @@ footer {
     }
 
     .video-section iframe {
-        height: 300px; /* 手機上縮小高度 */
+        height: 300px;
     }
     .team-members {
         flex-direction: column;
-        gap: 15px; /* 垂直間距 */
+        gap: 15px;
     }
     .member-card {
-        width: 100%; /* 手機上變為全寬 */
+        width: 100%;
     }
 }
 /* ==================================== */
@@ -474,16 +543,15 @@ footer {
 /* 1. 設定容器：相對定位是關鍵，讓子選單可以相對它定位 */
 .dropdown {
     position: relative;
-    display: inline-block; /* 確保它與其他導航項目並排 */
+    display: inline-block;
 }
 
 /* 2. 主按鈕樣式 (Tools) */
 .dropbtn {
-    /* 繼承導航列的樣式 */
     padding: 5px 10px;
     font-weight: 500;
     color: var(--text-color);
-    border-bottom: 2px solid transparent; 
+    border-bottom: 2px solid transparent;  
     transition: color 0.3s;
 }
 
@@ -494,22 +562,19 @@ footer {
 
 /* 3. 下拉內容容器樣式 */
 .dropdown-content {
-    /* 絕對定位，將子選單定位在主按鈕下方 */
     position: absolute;
-    background-color: var(--white-color); /* 白色背景 */
-    min-width: 180px; /* 確保內容足夠顯示 */
+    background-color: var(--white-color);
+    min-width: 180px;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-    z-index: 1001; /* 確保它在其他內容之上 */
+    z-index: 1001;
     border: 1px solid var(--light-purple);
-    border-top: none; 
-    border-radius: 0 0 5px 5px; /* 底部圓角 */
+    border-top: none;  
+    border-radius: 0 0 5px 5px;
     
-    /* 預設隱藏子選單 */
     display: none;
     
-    /* 調整位置，讓它緊貼在主按鈕下方 */
     top: 100%;
-    left: 0; 
+    left: 0;  
 }
 
 /* 4. 子選單項目樣式 */
@@ -517,10 +582,10 @@ footer {
     color: var(--text-color);
     padding: 12px 16px;
     text-decoration: none;
-    display: block; /* 讓每個連結佔滿整個寬度 */
+    display: block;
     text-align: left;
     border-bottom: 1px solid #f1f1f1;
-    white-space: nowrap; /* 防止文字換行 */
+    white-space: nowrap;
 }
 
 .dropdown-content a:last-child {
@@ -528,14 +593,14 @@ footer {
 }
 
 .dropdown-content a i {
-    margin-right: 8px; /* 讓 Icon 和文字分隔開 */
+    margin-right: 8px;
 }
 
 /* 5. 子選單項目懸停效果 */
 .dropdown-content a:hover {
-    background-color: var(--light-purple); /* 滑鼠移入時的背景色 */
+    background-color: var(--light-purple);
     color: var(--primary-color);
-    border-bottom: none; /* 取消主導航的底線效果 */
+    border-bottom: none;
 }
 
 /* 6. 核心功能：當滑鼠懸停在整個 .dropdown 容器上時，顯示 .dropdown-content */
@@ -546,22 +611,15 @@ footer {
 /* 10. 子頁面標題 Banner 樣式 */
 /* ==================================== */
 .page-header {
-    /* 🌟 修正 2A：確保足夠的上下內邊距 🌟 */
-    padding: 20px 0; 
-    
-    /* 修正 2B：確保標題與下方的卡片列表有間距 */
-    margin-bottom: 25px; 
-    
+    padding: 20px 0;  
+    margin-bottom: 25px;  
     text-align: center;
     
-    /* 根據您的要求，確保這些屬性被移除或設定為 none */
-    background: none; 
-    border-radius: 0; 
+    background: none;  
+    border-radius: 0;  
     border: none;
     
-    /* 🌟 修正 2C：移除 page-header 的 display:flex/grid 設置 🌟 */
-    /* 如果 page-header 被設定了 display: flex/grid，請確保移除，讓其內容自然垂直排列。 */
-    display: block; /* 確保它是一個標準的塊級元素 */
+    display: block;
 }
 
 /* 確保 h1 和 p 標籤的文字顏色沒有因為背景移除而變得不可見 */
@@ -586,24 +644,23 @@ footer {
 
 /* 1. 課程列表容器: 移除 Grid 佈局 */
 .lesson-list {
-    /* 移除所有 Grid/Flex 佈局，回歸標準文檔流 */
-    display: block; 
-    gap: 0; 
+    display: block;  
+    gap: 0;  
     margin-top: 20px;
 }
 
 /* 2. 課程條列式項目樣式 */
 .lesson-item {
-    display: flex; /* 使用 Flexbox 讓內容和按鈕左右對齊 */
-    justify-content: space-between; /* 內容和按鈕間隔最大空間 */
-    align-items: center; /* 垂直居中對齊 */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     
     background-color: var(--white-color);
     border: 1px solid var(--light-purple);
-    border-left: 5px solid var(--primary-color); /* 左側強調色條 */
+    border-left: 5px solid var(--primary-color);
     border-radius: 8px;
     padding: 20px;
-    margin-bottom: 15px; /* 項目間距 */
+    margin-bottom: 15px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     transition: box-shadow 0.2s;
 }
@@ -613,8 +670,8 @@ footer {
 }
 
 .lesson-content {
-    flex-grow: 1; /* 內容佔據所有可用空間 */
-    padding-right: 20px; /* 與按鈕保持間距 */
+    flex-grow: 1;
+    padding-right: 20px;
 }
 
 /* 3. 調整文字樣式 (沿用原卡片中的樣式，但修改層級) */
@@ -624,7 +681,7 @@ footer {
     margin-bottom: 10px;
     color: var(--primary-color);
     line-height: 1.4;
-    border-bottom: none; /* 移除 h2 預設的底線 */
+    border-bottom: none;
     padding-bottom: 0;
 }
 
@@ -667,14 +724,14 @@ footer {
 /* 4. RWD 調整：小螢幕時讓按鈕垂直排列 */
 @media (max-width: 768px) {
     .lesson-item {
-        flex-direction: column; /* 小螢幕上內容和按鈕垂直堆疊 */
+        flex-direction: column;
         align-items: flex-start;
     }
     .lesson-content {
         padding-right: 0;
-        margin-bottom: 15px; /* 內容與按鈕間距 */
+        margin-bottom: 15px;
     }
     .lesson-item .btn-primary {
-        align-self: flex-end; /* 按鈕靠右對齊 */
+        align-self: flex-end;
     }
 }
