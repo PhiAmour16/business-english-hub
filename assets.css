@@ -722,78 +722,81 @@ footer {
     color: var(--primary-color);
 }
 /* ==================================== */
-/* 8. RWD 調整 (行動裝置優化) */
+/* 8. RWD 調整 (行動裝置深度優化) */
 /* ==================================== */
 @media (max-width: 768px) {
-    /* 1. 通用標題縮小 */
-    h1 { font-size: 2em; }
-    h2 { font-size: 1.5em; }
-    
-    /* 2. 導航列改為垂直排列 */
-    .navbar {
-        flex-direction: column;
-        align-items: flex-start;
-        padding-bottom: 10px;
+    /* 1. 解決 Navbar 擋住內容的問題 */
+    body {
+        /* 手機版導航列可能變高，增加頂部間距確保內容不被遮擋 */
+        padding-top: 120px; 
     }
+
+    .navbar {
+        flex-direction: column; /* 讓 Logo 與 Nav 垂直排列 */
+        padding: 10px 5%;
+        height: auto;           /* 讓高度隨內容自動增長 */
+    }
+
+    .navbar nav {
+        display: flex;
+        flex-wrap: wrap;       /* 🌟 讓選單項目在太擠時自動換行 */
+        justify-content: center;
+        margin-top: 10px;
+        gap: 10px;
+    }
+
     .navbar nav a {
         margin-left: 0;
-        margin-right: 15px;
+        font-size: 0.9em;
+        padding: 5px;
     }
 
-    /* 🌟 3. 調整 index.html 的精選影片卡片 (調大並置中) 🌟 */
-    .video-carousel {
-        flex-direction: column; /* 強制卡片垂直堆疊 */
-        align-items: center;    /* 卡片水平居中 */
-        gap: 30px;              /* 增加卡片之間的上下間距 */
-    }
-
-    .video-card {
-        width: 95%;             /* 🌟 調大寬度：佔滿 95% 螢幕，視覺感更強 🌟 */
-        max-width: 500px;       /* 提升最大寬度限制 */
-        margin: 0 auto;
-        padding: 25px;          /* 稍微增加內距讓大圖更有質感 */
-    }
-
-    /* 🌟 4. 調整 about.html 的團隊介紹卡片 (垂直排列) 🌟 */
-    .team-members {
-        flex-direction: column; /* 🌟 核心修正：強制垂直排列 🌟 */
-        align-items: center;    /* 卡片水平置中 */
-        gap: 25px;              /* 增加成員間的距離 */
-        width: 100%;
-    }
-
-    .member-card {
-        width: 85%;             /* 🌟 讓團隊卡片在手機上寬度適中且顯眼 🌟 */
-        max-width: 350px;
-        margin: 0 auto;
-    }
-
-    /* 5. 課程列表 (business.html) 調整 */
-    .lesson-item {
+    /* 2. 修正 Index 大標題跑掉的問題 */
+    .hero-banner {
+        /* 🌟 核心修正：手機版不要強排 100vh，改用內容撐開，避免標題擠到下方 */
+        height: auto; 
+        min-height: 60vh;      /* 給予一個最小高度，確保背景圖存在感 */
+        padding: 40px 0;       /* 增加上下內距，讓內容有呼吸空間 */
+        display: flex;
         flex-direction: column;
-        align-items: flex-start;
-    }
-    .lesson-content {
-        padding-right: 0;
-        margin-bottom: 15px;
-    }
-    .lesson-item .btn-primary {
-        align-self: flex-end; /* 按鈕靠右 */
-    }
-
-    /* 6. 哲學區塊與語法列表調整 */
-    .philosophy-points, .syntax-list {
-        flex-direction: column;
+        justify-content: center;
         align-items: center;
-        gap: 20px;
-    }
-    
-    .philosophy-points div {
-        width: 100%; /* 哲學卡片在手機上佔滿寬度 */
-        border-left: 5px solid var(--accent-color);
+        position: relative;    /* 🌟 改回 relative，讓它遵循正常排版順序 */
+        margin-top: 0;
     }
 
-    .video-section iframe {
-        height: 250px; /* 縮小影片預覽高度 */
+    .content-container-hero {
+        margin-top: 0;         /* 移除之前的偏移 */
+        text-align: center;
+    }
+
+    .hero-banner h1 {
+        font-size: 1.8em;      /* 手機版標題縮小，避免斷行太亂 */
+        line-height: 1.3;
+        width: 90%;
+        margin: 0 auto 15px auto;
+    }
+
+    .hero-banner p {
+        font-size: 1em;
+        width: 85%;
+        margin: 0 auto;
+    }
+
+    /* 3. 修正 Main 區塊與內容遮擋 */
+    main {
+        padding-top: 0;        /* 🌟 核心修正：移除 padding-top: 100vh */
+        margin-top: 0;         /* 確保 main 緊接在 hero-banner 後面 */
+    }
+
+    /* 4. 卡片大小優化 (精選影片 & 團隊介紹) */
+    .video-card, .member-card {
+        width: 90% !important;
+        max-width: none;
+        margin-bottom: 20px;
+    }
+
+    .video-carousel, .team-members {
+        gap: 15px;
     }
 }
