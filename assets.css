@@ -721,20 +721,10 @@ footer {
     background-color: #f3e5f5;
     color: var(--primary-color);
 }
-/* 4. RWD 調整：小螢幕時讓按鈕垂直排列 */
+/* ==================================== */
+/* 8. RWD 調整 (行動裝置優化) */
+/* ==================================== */
 @media (max-width: 768px) {
-    .lesson-item {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    .lesson-content {
-        padding-right: 0;
-        margin-bottom: 15px;
-    }
-    .lesson-item .btn-primary {
-        align-self: flex-end;
-    }
-
     /* 1. 通用標題縮小 */
     h1 { font-size: 2em; }
     h2 { font-size: 1.5em; }
@@ -750,35 +740,57 @@ footer {
         margin-right: 15px;
     }
 
-    /* 🌟 3. 調整 index.html 的精選影片卡片 🌟 */
+    /* 🌟 3. 調整 index.html 的精選影片卡片 (調大並置中) 🌟 */
     .video-carousel {
-        flex-direction: column; /* 垂直排列 */
-        align-items: center;    /* 置中 */
-        gap: 25px;              /* 卡片間距 */
+        flex-direction: column; /* 強制卡片垂直堆疊 */
+        align-items: center;    /* 卡片水平居中 */
+        gap: 30px;              /* 增加卡片之間的上下間距 */
     }
 
     .video-card {
-        width: 90%;             /* 🌟 調大卡片寬度：從原本的 100% 稍微縮減讓左右留白，看起來更大更有質感 🌟 */
-        max-width: 400px;       /* 限制最大寬度防止在大螢幕手機上過大 */
+        width: 95%;             /* 🌟 調大寬度：佔滿 95% 螢幕，視覺感更強 🌟 */
+        max-width: 500px;       /* 提升最大寬度限制 */
         margin: 0 auto;
+        padding: 25px;          /* 稍微增加內距讓大圖更有質感 */
     }
 
-    /* 🌟 4. 調整 about.html 的團隊介紹卡片 🌟 */
+    /* 🌟 4. 調整 about.html 的團隊介紹卡片 (垂直排列) 🌟 */
     .team-members {
         flex-direction: column; /* 🌟 核心修正：強制垂直排列 🌟 */
-        align-items: center;    /* 水平置中 */
-        gap: 20px;
+        align-items: center;    /* 卡片水平置中 */
+        gap: 25px;              /* 增加成員間的距離 */
+        width: 100%;
     }
 
     .member-card {
-        width: 85%;             /* 🌟 調整卡片寬度，讓它在手機上更顯眼 🌟 */
+        width: 85%;             /* 🌟 讓團隊卡片在手機上寬度適中且顯眼 🌟 */
+        max-width: 350px;
         margin: 0 auto;
     }
 
-    /* 5. 哲學區塊與語法列表調整 */
+    /* 5. 課程列表 (business.html) 調整 */
+    .lesson-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .lesson-content {
+        padding-right: 0;
+        margin-bottom: 15px;
+    }
+    .lesson-item .btn-primary {
+        align-self: flex-end; /* 按鈕靠右 */
+    }
+
+    /* 6. 哲學區塊與語法列表調整 */
     .philosophy-points, .syntax-list {
         flex-direction: column;
         align-items: center;
+        gap: 20px;
+    }
+    
+    .philosophy-points div {
+        width: 100%; /* 哲學卡片在手機上佔滿寬度 */
+        border-left: 5px solid var(--accent-color);
     }
 
     .video-section iframe {
