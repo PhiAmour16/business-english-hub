@@ -733,12 +733,25 @@ footer {
     /* 1. 基礎佈局修正 */
     body {
         /* 增加頂部間距，防止固定 Navbar 遮擋內容 */
-        padding-top: 80px; 
+        padding-top: 70px !important; 
+    }
+
+    /* 修正所有頁面的 Header，確保不被 Navbar 遮住且高度自適應 */
+    .hero-banner, .page-header {
+        height: auto !important;      /* 讓高度隨內容自動增加 */
+        min-height: 40vh;             /* 保持背景圖的基本視覺高度 */
+        padding: 50px 20px !important; /* 增加內距，確保文字不貼邊且不被遮擋 */
+        position: relative !important; /* 確保它遵循正常排版順序 */
+        margin-top: 0 !important;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
     /* 2. 漢堡選單切換邏輯 */
     .hamburger {
-        display: flex; /* 在手機版顯示漢堡圖示 */
+        display: flex; 
         flex-direction: column;
         justify-content: space-around;
         width: 30px;
@@ -755,17 +768,15 @@ footer {
         border-radius: 2px;
     }
 
-    /* 隱藏 Checkbox */
     .menu-toggle {
         display: none;
     }
 
-    /* 手機版導航列清單樣式 (預設隱藏) */
     .navbar nav {
         display: none; 
         flex-direction: column;
         position: absolute;
-        top: 100%; /* 出現在 Navbar 正下方 */
+        top: 60px; /* 根據 Navbar 高度微調 */
         left: 0;
         width: 100%;
         background-color: var(--white-color);
@@ -773,14 +784,14 @@ footer {
         padding: 20px 0;
         z-index: 999;
         box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        max-height: calc(100vh - 60px);
+        overflow-y: auto;
     }
 
-    /* 🌟 當 Checkbox 被勾選時，顯示選單 🌟 */
     .menu-toggle:checked ~ nav {
         display: flex;
     }
 
-    /* 漢堡按鈕動畫：變成 X */
     .menu-toggle:checked ~ .hamburger span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
     .menu-toggle:checked ~ .hamburger span:nth-child(2) { opacity: 0; }
     .menu-toggle:checked ~ .hamburger span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
@@ -792,19 +803,7 @@ footer {
         font-size: 1.1em;
     }
 
-    /* 3. Index 首頁標題格式修正 (防止跑位) */
-    .hero-banner {
-        height: auto;
-        min-height: 50vh;
-        padding: 60px 0;
-        position: relative; /* 讓它回到正常文檔流 */
-        z-index: 1;
-        margin-top: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
+    /* 3. Index 首頁標題格式修正 */
     .content-container-hero {
         margin-top: 0;
         text-align: center;
@@ -818,21 +817,7 @@ footer {
         text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
     }
 
-    .hero-banner p {
-        font-size: 1.1em;
-        line-height: 1.5;
-    }
-
-    /* 修正 Main 區塊與背景的重疊 */
-    main {
-        padding-top: 0;
-        margin-top: 0;
-        position: relative;
-        z-index: 2;
-        background-color: var(--main-content-bg);
-    }
-
-    /* 4. 調整卡片大小：精選影片調大 */
+    /* 4. 調整卡片大小與顯示完整性 (Business 頁面修正重點) */
     .video-carousel {
         flex-direction: column;
         align-items: center;
@@ -840,14 +825,33 @@ footer {
     }
 
     .video-card {
-        width: 95% !important; /* 🌟 調大影片卡片 🌟 */
+        width: 95% !important; 
         max-width: 450px;
+        height: auto !important; /* 確保卡片高度隨內容生長 */
         margin: 0 auto;
     }
 
-    /* 5. 調整卡片排列：團隊介紹垂直排列 */
+    /* Business 影片列表項目修正 */
+    .lesson-item {
+        flex-direction: column !important;
+        align-items: center !important;
+        height: auto !important;     /* 🌟 核心：取消高度限制 */
+        padding: 20px !important;
+        overflow: visible !important; /* 🌟 核心：確保內容不被截斷 */
+        width: 95% !important;
+        margin: 15px auto !important;
+        text-align: center;
+    }
+
+    .lesson-content {
+        padding-right: 0 !important;
+        margin-bottom: 15px;
+        width: 100%;
+    }
+
+    /* 5. 團隊介紹卡片 */
     .team-members {
-        flex-direction: column; /* 🌟 強制垂直 🌟 */
+        flex-direction: column;
         align-items: center;
         gap: 25px;
     }
@@ -856,6 +860,7 @@ footer {
         width: 90% !important;
         max-width: 320px;
         margin: 0 auto;
+        height: auto !important;
     }
 
     /* 6. 其他細節調整 */
@@ -865,13 +870,9 @@ footer {
         gap: 20px;
     }
 
-    .lesson-item {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
     .lesson-item .btn-primary {
-        align-self: stretch; /* 按鈕在手機上佔滿寬度，好點擊 */
+        align-self: center; /* 手機版按鈕置中 */
+        width: 80%;
         text-align: center;
         margin-top: 10px;
     }
