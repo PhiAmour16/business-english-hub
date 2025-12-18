@@ -734,4 +734,54 @@ footer {
     .lesson-item .btn-primary {
         align-self: flex-end;
     }
+
+    /* 1. 通用標題縮小 */
+    h1 { font-size: 2em; }
+    h2 { font-size: 1.5em; }
+    
+    /* 2. 導航列改為垂直排列 */
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-bottom: 10px;
+    }
+    .navbar nav a {
+        margin-left: 0;
+        margin-right: 15px;
+    }
+
+    /* 🌟 3. 調整 index.html 的精選影片卡片 🌟 */
+    .video-carousel {
+        flex-direction: column; /* 垂直排列 */
+        align-items: center;    /* 置中 */
+        gap: 25px;              /* 卡片間距 */
+    }
+
+    .video-card {
+        width: 90%;             /* 🌟 調大卡片寬度：從原本的 100% 稍微縮減讓左右留白，看起來更大更有質感 🌟 */
+        max-width: 400px;       /* 限制最大寬度防止在大螢幕手機上過大 */
+        margin: 0 auto;
+    }
+
+    /* 🌟 4. 調整 about.html 的團隊介紹卡片 🌟 */
+    .team-members {
+        flex-direction: column; /* 🌟 核心修正：強制垂直排列 🌟 */
+        align-items: center;    /* 水平置中 */
+        gap: 20px;
+    }
+
+    .member-card {
+        width: 85%;             /* 🌟 調整卡片寬度，讓它在手機上更顯眼 🌟 */
+        margin: 0 auto;
+    }
+
+    /* 5. 哲學區塊與語法列表調整 */
+    .philosophy-points, .syntax-list {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .video-section iframe {
+        height: 250px; /* 縮小影片預覽高度 */
+    }
 }
